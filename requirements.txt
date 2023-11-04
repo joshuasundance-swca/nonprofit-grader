@@ -1,6 +1,7 @@
 anthropic
 cohere
 faiss-cpu
+jupyterlab
 langchain
 langchain-cli
 langchainhub

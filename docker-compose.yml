@@ -11,10 +11,11 @@ services:
       - .env
     ports:
       - "${APP_PORT:-7860}:${APP_PORT:-7860}"
+    command: ["jupyter", "lab", "--ip=0.0.0.0", "--port=${APP_PORT:-7860}", "--no-browser"]
 #    command: ["/bin/bash"]
-    command: [
-      "streamlit", "run",
-      "/home/appuser/nonprofit-grader/frontend/frontend/app.py",
-      "--server.port", "${APP_PORT:-7860}",
-      "--server.address", "0.0.0.0"
-    ]
+#    command: [
+#      "streamlit", "run",
+#      "/home/appuser/nonprofit-grader/frontend/frontend/app.py",
+#      "--server.port", "${APP_PORT:-7860}",
+#      "--server.address", "0.0.0.0"
+#    ]
