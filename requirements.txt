@@ -1,0 +1,17 @@
+anthropic
+cohere
+faiss-cpu
+langchain
+langchain-cli
+langchainfhub
+langserve
+langsmith
+numpy
+openai
+pymongo
+pypdf
+rank_bm25
+streamlit
+streamlit-feedback
+tiktoken
+together
