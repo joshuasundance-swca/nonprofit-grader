@@ -9,6 +9,7 @@ langserve
 langsmith
 numpy
 openai
+opencv-python-headless
 pymongo
 pypdf
 rank_bm25
