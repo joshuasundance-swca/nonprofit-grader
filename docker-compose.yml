@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  nonprofit-grader:
+    image: nonprofit-grader:latest
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "${APP_PORT:-7860}:${APP_PORT:-7860}"
+    command: ["/bin/bash"]
+#    command: [
+#      "streamlit", "run",
+#      "/home/appuser/nonprofit-grader/app.py",
+#      "--server.port", "${APP_PORT:-7860}",
+#      "--server.address", "0.0.0.0"
+#    ]
