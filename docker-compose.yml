@@ -6,6 +6,7 @@ services:
     build: .
     volumes:
         - ./nonprofit-grader:/home/appuser/nonprofit-grader
+        - ./data:/home/appuser/data
     env_file:
       - .env
     ports:
