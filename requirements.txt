@@ -1,4 +1,5 @@
 anthropic
+azure-ai-formrecognizer
 cohere
 faiss-cpu
 jupyterlab
