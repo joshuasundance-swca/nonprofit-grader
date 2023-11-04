@@ -17,4 +17,4 @@ streamlit
 streamlit-feedback
 tiktoken
 together
-unstructured
+unstructured[pdf]
