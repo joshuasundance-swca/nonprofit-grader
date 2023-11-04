@@ -3,7 +3,7 @@ cohere
 faiss-cpu
 langchain
 langchain-cli
-langchainfhub
+langchainhub
 langserve
 langsmith
 numpy

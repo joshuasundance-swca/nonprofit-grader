@@ -4,14 +4,16 @@ services:
   nonprofit-grader:
     image: nonprofit-grader:latest
     build: .
+    volumes:
+        - ./nonprofit-grader:/home/appuser/nonprofit-grader
     env_file:
       - .env
     ports:
       - "${APP_PORT:-7860}:${APP_PORT:-7860}"
-    command: ["/bin/bash"]
-#    command: [
-#      "streamlit", "run",
-#      "/home/appuser/nonprofit-grader/app.py",
-#      "--server.port", "${APP_PORT:-7860}",
-#      "--server.address", "0.0.0.0"
-#    ]
+#    command: ["/bin/bash"]
+    command: [
+      "streamlit", "run",
+      "/home/appuser/nonprofit-grader/app.py",
+      "--server.port", "${APP_PORT:-7860}",
+      "--server.address", "0.0.0.0"
+    ]
