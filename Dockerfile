@@ -1,10 +1,9 @@
 FROM python:3.11-slim-bookworm
 
 RUN apt-get update && \
-    apt-get install libmagic-dev poppler-utils tesseract-ocr ffmpeg libsm6 libxext6 libgl1-mesa-glx libgl1 -y && \
+    apt-get install libmagic-dev poppler-utils tesseract-ocr ffmpeg libsm6 libxext6 libgl1-mesa-glx libgl1 gcc python3-dev -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
 
 RUN adduser --uid 1000 --disabled-password --gecos '' appuser
 USER 1000
