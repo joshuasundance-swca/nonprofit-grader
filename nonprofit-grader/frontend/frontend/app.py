@@ -1,4 +1,10 @@
 import streamlit as st
+from langchain.prompts import ChatPromptTemplate
+from langchain.schema import SystemMessage, HumanMessage
+from langchain.schema.runnable import RunnableMap
+from langserve import RemoteRunnable
+
+nonprofit = RemoteRunnable("http://backend-service:8084/nonprofit/")
 
 # Custom MongoDB-like styling
 st.markdown("""
@@ -33,21 +39,12 @@ def brief_page():
     st.subheader("Solution: ")
     st.markdown("Impact Aligner is an AI-powered platform that extracts and interprets complex data from charity filings. This innovative approach transforms cumbersome and expensive research into a seamless experience, empowering donors to effortlessly discover and contribute to organizations that genuinely contribute to impact goals they care most about. ")
 
-    
+
 
 # Application Page Content
-def fetch_charities(interests):
-    # Replace this with your actual function to get charities data
-    charities_info = [
-        {
-            'name': 'Charity A',
-            'mission': 'To save the bees.',
-            'spending': '80% on programs, 20% on admin and fundraising.',
-            'alignment': 'High'
-        },
-        # ...add more charities
-    ]
-    return charities_info
+def fetch_charities(interests: str) -> str:
+    output = str(nonprofit.invoke({"query": str(interests)}))
+    return output
 
 def application_page():
     st.subheader("What causes are you most passionate about?")
@@ -84,12 +81,7 @@ def application_page():
     # Check if there is any charity info in the session state to display
     if st.session_state['charities_info']:
         # Display each charity's information
-        for charity in st.session_state['charities_info']:
-            with st.container():
-                st.subheader(charity['name'])
-                st.text(f"Mission: {charity['mission']}")
-                st.text(f"Spending: {charity['spending']}")
-                st.text(f"Alignment with your interests: {charity['alignment']}")
+        st.markdown(st.session_state.charities_info)
 
 # Conclusion Page Content
 def conclusion_page():
