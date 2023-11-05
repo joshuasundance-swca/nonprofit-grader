@@ -16,6 +16,6 @@ prompt = ChatPromptTemplate.from_template("Find organization(s) that deals with 
 
 add_routes(
     app,
-    qa,
+    qa | (lambda r: r["result"]),
     path="/nonprofit",
 )

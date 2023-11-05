@@ -43,15 +43,6 @@ def truncate_pdfs_in_dir(root_dir: str) -> None:
 
 
 
-OCR_ENDPOINT = os.environ["OCR_ENDPOINT"]
-OCR_API_KEY = os.environ["OCR_API_KEY"]
-MONGODB_URI = os.environ["MONGODB_URI"]
-DB_NAME = "nonprofit-grader"
-COLLECTION_NAME = "jan2022"
-ATLAS_VECTOR_SEARCH_INDEX_NAME = "default"
-client = MongoClient(MONGODB_URI)
-
-MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
 
 # document_analysis_client = DocumentAnalysisClient(
 #     endpoint=OCR_ENDPOINT,
@@ -81,19 +72,28 @@ MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
 
 
 
-vector_search = MongoDBAtlasVectorSearch.from_connection_string(
-    MONGODB_URI,
-    "nonprofit-grader" + "." + COLLECTION_NAME,
-    OpenAIEmbeddings(disallowed_special=()),
-    index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
-)
-
 
 # Perform a similarity search between the embedding of the query and the embeddings of the documents
 # query = "Where does kingham youth soccer operate?"
 
 # results = vector_search.similarity_search(query)
 
+OCR_ENDPOINT = os.environ["OCR_ENDPOINT"]
+OCR_API_KEY = os.environ["OCR_API_KEY"]
+MONGODB_URI = os.environ["MONGODB_URI"]
+DB_NAME = "nonprofit-grader"
+COLLECTION_NAME = "jan2022"
+ATLAS_VECTOR_SEARCH_INDEX_NAME = "default"
+client = MongoClient(MONGODB_URI)
+
+MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
+
+vector_search = MongoDBAtlasVectorSearch.from_connection_string(
+    MONGODB_URI,
+    "nonprofit-grader" + "." + COLLECTION_NAME,
+    OpenAIEmbeddings(disallowed_special=()),
+    index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
+)
 qa_retriever = vector_search.as_retriever(
     search_type="similarity",
     search_kwargs={"k": 3},
