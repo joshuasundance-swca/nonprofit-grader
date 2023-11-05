@@ -43,15 +43,73 @@ def brief_page():
 
 # Application Page Content
 def application_page():
-    st.title("Application")
+    def userInput():
+        # Top card
+        st.markdown("""
+                        ### User Interests
+                        This is the content of the third card.
+                        - Detail 1
+                        - Detail 2
+                        """)
 
-    # Top card
-    st.markdown("""
-                ### User Interests
-                This is the content of the third card.
-                - Detail 1
-                - Detail 2
-                """)
+        st.title("Streamlit Input Widgets")
+
+        # Text input
+        text_input = st.text_input("Enter some text")
+
+        # Text area
+        text_area = st.text_area("Enter a lot of text")
+
+        # Number input
+        number_input = st.number_input("Enter a number")
+
+        # Slider
+        slider = st.slider("Choose a number", 0, 100)
+
+        # Select slider
+        select_slider = st.select_slider("Choose from a range", options=[1, 2, 3, 4, 5])
+
+        # Checkbox
+        checkbox = st.checkbox("Check for Yes")
+
+        # Selectbox
+        select = st.selectbox("Choose an option", ["Option 1", "Option 2", "Option 3"])
+
+        # Multiselect
+        multiselect = st.multiselect("Choose multiple options", ["Option A", "Option B", "Option C"])
+
+        # Radio button
+        radio = st.radio("Choose an option", ["Option X", "Option Y", "Option Z"])
+
+        # File Uploader
+        uploaded_file = st.file_uploader("Upload a file")
+
+        # Date input
+        date_input = st.date_input("Select a date")
+
+        # Time input
+        time_input = st.time_input("Select a time")
+
+        # Color picker
+        color_picker = st.color_picker("Pick a color")
+
+        # Display the input values (optional)
+        st.write("Text input:", text_input)
+        st.write("Text area:", text_area)
+        st.write("Number input:", number_input)
+        st.write("Slider:", slider)
+        st.write("Select slider:", select_slider)
+        st.write("Checkbox:", checkbox)
+        st.write("Selectbox:", select)
+        st.write("Multiselect:", multiselect)
+        st.write("Radio button:", radio)
+        st.write("File Uploader:", uploaded_file)
+        st.write("Date input:", date_input)
+        st.write("Time input:", time_input)
+        st.write("Color picker:", color_picker)
+
+    userInput()
+    st.title("Application")
     st.markdown("""
             ### Process
             This is the content of the third card.
