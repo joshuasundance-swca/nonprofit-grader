@@ -50,8 +50,9 @@ def fetch_charities(interests):
     return charities_info
 
 def application_page():
-    st.title("What causes are you most passionate about?")
-
+    st.subheader("What causes are you most passionate about?")
+    st.markdown("May you consider the following:")
+    st.markdown(" - Climate Change, Environment, and Animals")
     # Text input
     text_input = st.text_input("Enter your interests", key="input")
 
