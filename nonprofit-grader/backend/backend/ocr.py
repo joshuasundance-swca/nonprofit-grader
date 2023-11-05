@@ -96,15 +96,16 @@ vector_search = MongoDBAtlasVectorSearch.from_connection_string(
 )
 qa_retriever = vector_search.as_retriever(
     search_type="similarity",
-    search_kwargs={"k": 3},
+    search_kwargs={"k": 1},
 )
 
 
-prompt_template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+prompt_template = """Find organization(s) that deals with {question}, and tell me about them.
+
+
+Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 
 {context}
-
-Question: {question}
 """
 PROMPT = PromptTemplate(
     template=prompt_template, input_variables=["context", "question"]
