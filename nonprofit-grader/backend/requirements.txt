@@ -1,0 +1,8 @@
+langchain
+langchain-cli
+langchainhub
+langserve
+langsmith
+openai
+pymongo
+tiktoken
