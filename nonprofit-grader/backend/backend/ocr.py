@@ -78,8 +78,8 @@ def truncate_pdfs_in_dir(root_dir: str) -> None:
 
 # results = vector_search.similarity_search(query)
 
-OCR_ENDPOINT = os.environ["OCR_ENDPOINT"]
-OCR_API_KEY = os.environ["OCR_API_KEY"]
+# OCR_ENDPOINT = os.environ["OCR_ENDPOINT"]
+# OCR_API_KEY = os.environ["OCR_API_KEY"]
 MONGODB_URI = os.environ["MONGODB_URI"]
 DB_NAME = "nonprofit-grader"
 COLLECTION_NAME = "jan2022"
