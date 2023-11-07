@@ -5,7 +5,8 @@ from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import DirectoryLoader
 # from langchain.document_loaders.pdf import DocumentIntelligenceLoader
-from langchain.embeddings import OpenAIEmbeddings
+# from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings import CohereEmbeddings
 from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.vectorstores import MongoDBAtlasVectorSearch
@@ -43,43 +44,6 @@ def truncate_pdfs_in_dir(root_dir: str) -> None:
 
 
 
-
-# document_analysis_client = DocumentAnalysisClient(
-#     endpoint=OCR_ENDPOINT,
-#     credential=AzureKeyCredential(OCR_API_KEY)
-# )
-# 
-# loader = DirectoryLoader(
-#     '.',
-#     glob="./truncated_*.pdf",
-#     use_multithreading=True,
-#     loader_cls=DocumentIntelligenceLoader,
-#     loader_kwargs={"client": document_analysis_client, "model": "prebuilt-read"}
-# )
-# 
-# 
-# docs = loader.load()
-# 
-# # insert the documents in MongoDB Atlas with their embedding
-# vector_search = MongoDBAtlasVectorSearch.from_documents(
-#     documents=docs,
-#     embedding=OpenAIEmbeddings(disallowed_special=()),
-#     collection=MONGODB_COLLECTION,
-#     index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
-# )
-
-
-
-
-
-
-# Perform a similarity search between the embedding of the query and the embeddings of the documents
-# query = "Where does kingham youth soccer operate?"
-
-# results = vector_search.similarity_search(query)
-
-# OCR_ENDPOINT = os.environ["OCR_ENDPOINT"]
-# OCR_API_KEY = os.environ["OCR_API_KEY"]
 MONGODB_URI = os.environ["MONGODB_URI"]
 DB_NAME = "nonprofit-grader"
 COLLECTION_NAME = "jan2022"
@@ -91,7 +55,8 @@ MONGODB_COLLECTION = client[DB_NAME][COLLECTION_NAME]
 vector_search = MongoDBAtlasVectorSearch.from_connection_string(
     MONGODB_URI,
     "nonprofit-grader" + "." + COLLECTION_NAME,
-    OpenAIEmbeddings(disallowed_special=()),
+    # OpenAIEmbeddings(disallowed_special=()),
+    CohereEmbeddings(),
     index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
 )
 qa_retriever = vector_search.as_retriever(
@@ -121,9 +86,44 @@ qa = RetrievalQA.from_chain_type(
     chain_type_kwargs={"prompt": PROMPT},
 )
 
+### below is old code for OCR document analysis.
+
+# document_analysis_client = DocumentAnalysisClient(
+#     endpoint=OCR_ENDPOINT,
+#     credential=AzureKeyCredential(OCR_API_KEY)
+# )
+# 
+# loader = DirectoryLoader(
+#     '.',
+#     glob="./truncated_*.pdf",
+#     use_multithreading=True,
+#     loader_cls=DocumentIntelligenceLoader,
+#     loader_kwargs={"client": document_analysis_client, "model": "prebuilt-read"}
+# )
+# 
+# 
+# docs = loader.load()
+# 
+# # insert the documents in MongoDB Atlas with their embedding
+# vector_search = MongoDBAtlasVectorSearch.from_documents(
+#     documents=docs,
+#     embedding=OpenAIEmbeddings(disallowed_special=()),
+#     collection=MONGODB_COLLECTION,
+#     index_name=ATLAS_VECTOR_SEARCH_INDEX_NAME,
+# )
+
+# Perform a similarity search between the embedding of the query and the embeddings of the documents
+# query = "Where does kingham youth soccer operate?"
+
+# results = vector_search.similarity_search(query)
+
+# OCR_ENDPOINT = os.environ["OCR_ENDPOINT"]
+# OCR_API_KEY = os.environ["OCR_API_KEY"]
+
 # query = "Find an organization that deals with soccer, and tell me about them."
 
 # docs = qa({"query": query})
 # 
 # print(docs["result"])
 # print(docs["source_documents"])
+

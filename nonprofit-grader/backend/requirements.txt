@@ -3,6 +3,7 @@ langchain-cli
 langchainhub
 langserve
 langsmith
+cohere
 openai
 pymongo
 tiktoken

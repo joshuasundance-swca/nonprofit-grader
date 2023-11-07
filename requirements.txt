@@ -17,6 +17,7 @@ rank_bm25
 rapidocr-onnxruntime
 streamlit
 streamlit-feedback
+cohere
 tiktoken
 together
 unstructured[pdf]

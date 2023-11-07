@@ -5,3 +5,4 @@ langserve
 langsmith
 streamlit
 streamlit-feedback
+cohere
