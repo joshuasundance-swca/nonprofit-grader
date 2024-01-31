@@ -20,3 +20,4 @@ streamlit-feedback
 tiktoken
 together
 unstructured[pdf]
+aiohttp>=3.9.2 # not directly required, pinned by Snyk to avoid a vulnerability
