@@ -6,3 +6,4 @@ langsmith
 openai
 pymongo
 tiktoken
+dnspython>=2.6.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
