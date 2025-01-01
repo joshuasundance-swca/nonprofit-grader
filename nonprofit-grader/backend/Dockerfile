@@ -1,4 +1,4 @@
-FROM python:3.11-slim-bookworm
+FROM python:3.14.0a3-slim-bookworm
 
 RUN apt-get update && \
     apt-get install libmagic-dev poppler-utils tesseract-ocr ffmpeg libsm6 libxext6 libgl1-mesa-glx libgl1 -y && \
